@@ -8,6 +8,7 @@ import javax.persistence.*;
 @Setter
 @Entity
 @NoArgsConstructor(access =  AccessLevel.PUBLIC)
+// 서비스의 정책을 넣지말자!!
 public class Post {
 
     @Id
@@ -24,4 +25,5 @@ public class Post {
         this.title = title;
         this.content = content;
     }
+
 }

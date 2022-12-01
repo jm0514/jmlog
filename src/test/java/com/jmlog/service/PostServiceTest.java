@@ -3,6 +3,7 @@ package com.jmlog.service;
 import com.jmlog.domain.Post;
 import com.jmlog.repository.PostRepository;
 import com.jmlog.request.PostCreate;
+import com.jmlog.request.PostEdit;
 import com.jmlog.request.PostSearch;
 import com.jmlog.response.PostResponse;
 import org.junit.jupiter.api.Assertions;
@@ -12,19 +13,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.http.MediaType;
-
 
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.mock.http.server.reactive.MockServerHttpRequest.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
 @SpringBootTest
 @AutoConfiguration
@@ -107,6 +101,55 @@ class PostServiceTest {
 
     }
 
+    @Test
+    @DisplayName("글 제목 수정")
+    void test4() {
+        //given
+        Post post =Post.builder()
+                .title("호돌맨")
+                .content("반포자이")
+                .build();
 
+        postRepository.save(post);
+
+        PostEdit postEdit = PostEdit.builder()
+                .title("호돌걸")
+                .content("반포자이")
+                .build();
+        //when
+        postService.edit(post.getId(), postEdit);
+
+        //then
+        Post changePost = postRepository.findById(post.getId())
+                .orElseThrow(() -> new RuntimeException("글이 존재하지 않습니다. id=" + post.getId()));
+        assertEquals("호돌걸", changePost.getTitle());
+        assertEquals("반포자이", changePost.getContent());
+
+    }
+
+    @Test
+    @DisplayName("글 내용 수정")
+    void test5() {
+        //given
+        Post post =Post.builder()
+                .title("호돌맨")
+                .content("반포자이")
+                .build();
+
+        postRepository.save(post);
+
+        PostEdit postEdit = PostEdit.builder()
+                .title("호돌걸")
+                .content("초가집")
+                .build();
+        //when
+        postService.edit(post.getId(), postEdit);
+
+        //then
+        Post changePost = postRepository.findById(post.getId())
+                .orElseThrow(() -> new RuntimeException("글이 존재하지 않습니다. id=" + post.getId()));
+        assertEquals("초가집", changePost.getContent());
+
+    }
 
 }

@@ -3,7 +3,6 @@ package com.jmlog.response;
 import com.jmlog.domain.Post;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 /**
  * 서비스 정책에 맞는 클래스

@@ -1,5 +1,6 @@
 package com.jmlog.request;
 
+import com.jmlog.exception.InvalidRequest;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
@@ -19,6 +20,12 @@ public class PostCreate {
     public PostCreate(String title, String content) {
         this.title = title;
         this.content = content;
+    }
+
+    public void validate() {
+        if(title.contains("바보")){
+            throw new InvalidRequest("title", "제목에 바보를 포함할 수 없습니다.");
+        }
     }
     //빌더의 장점
     // -가독성이 좋다.(값 생성에 대한 유연함)

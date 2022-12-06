@@ -1,5 +1,6 @@
 package com.jmlog.controller;
 
+import com.jmlog.exception.InvalidRequest;
 import com.jmlog.request.PostCreate;
 import com.jmlog.request.PostEdit;
 import com.jmlog.request.PostSearch;
@@ -21,6 +22,7 @@ public class PostController {
 
     @PostMapping("/posts")
     public void post(@RequestBody @Valid PostCreate request) {
+        request.validate();
         postService.write(request);
     }
 

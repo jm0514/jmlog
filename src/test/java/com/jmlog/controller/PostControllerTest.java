@@ -64,8 +64,7 @@ class PostControllerTest {
                 .andExpect(content().string(""))
                 .andDo(print());
     }
-
-
+/*
     @Test
     @DisplayName("/posts 요청시 title값은 필수다.")
     void test2() throws Exception {
@@ -87,7 +86,7 @@ class PostControllerTest {
                 .andExpect(jsonPath("$.validation.title").value("타이틀을 입력해주세요."))
                 .andDo(print());
     }
-
+*/
     @Test
     @DisplayName("/posts 요청시 DB에 값이 저장된다.")
     void test3() throws Exception {
